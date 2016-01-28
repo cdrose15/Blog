@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity;
 
 namespace Blog.Controllers
 {
+
+    [RequireHttps]
     public class PostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

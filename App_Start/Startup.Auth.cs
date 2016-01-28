@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using Blog.Models;
 using Owin.Security.Providers.LinkedIn;
+using Owin.Security.Providers.Yahoo;
 
 namespace Blog
 {
@@ -47,13 +48,13 @@ namespace Blog
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            app.UseMicrosoftAccountAuthentication(
+                clientId: "0000000040182851",
+                clientSecret: "mRBKrSyOKF-6dqtDP83aw60hDJchenBb");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            app.UseTwitterAuthentication(
+               consumerKey: "	HcaXZ0wKoJl4uCi84phWrf9I7",
+               consumerSecret: "ZhfgpwwbS0JTTQaLXUAWnDRQTSi7xCZBVMXzavCNpQ8MZHOHKY");
 
             app.UseFacebookAuthentication(
                appId: "483091661898024",
@@ -65,9 +66,13 @@ namespace Blog
                 ClientSecret = "FkB0b0oSj-xQCDeOceQH1yiC"
             });
 
+            app.UseYahooAuthentication(
+                "dj0yJmk9RGQ2V2JZdWpsUEhWJmQ9WVdrOVlqRXpaamx4TjJzbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1iNw--",
+                "b106b05ca3e7a96f4cd04925db737248d29e7920");
+
             app.UseLinkedInAuthentication
-                ("774rk74tf2vchw",
-                "5rXX132egN4zpnzV");
+                ("77zywo4mfvooco",
+                "xdaQVfUbC4vTEP8p");
         }
     }
 }
