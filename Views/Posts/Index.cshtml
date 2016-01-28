@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Blog.Models.Post>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+
+            <h2 class="page-header">
+                Welcome To My Blog
+            </h2>
+
+            <!--Blog Post -->
+            @foreach (var post in Model)
+            {
+                <h4>@post.Title</h4>
+
+                <p>Created on: @post.Created</p>
+
+                <p><span class="lead"></span> <a href="http://@post.MediaURL" target="_blank"> @post.MediaURL</a> </p>
+
+                <p>@Html.Raw(post.Body) </p>
+
+                <button class="buttons">@Html.ActionLink("View Details", @post.Slug,"Blog")</button>
+
+                if (User.IsInRole("Admin"))
+                {
+                    <button class="adminButtons">@Html.ActionLink("Edit", "Edit", new { id = post.Id })</button>
+                    <button class="adminButtons"> @Html.ActionLink("Delete", "Delete", new { id = post.Id })</button>
+                }
+
+                <hr>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <button class="buttons">@Html.ActionLink("Admin", "Admin", "Posts")</button>
+            }
+        </div>
+
+        <!-- Blog Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Blog Search Well -->
+            <div class="well">
+                <h4>Blog Search</h4>
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+                <!-- /.input-group -->
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+</div>
+

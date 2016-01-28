@@ -1,0 +1,112 @@
+﻿@model Blog.Models.Post
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blog Post - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/blog-post.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+                <!-- Title -->
+                <h2>@Model.Title</h2>
+
+                <!-- Author -->
+                <p class="lead">
+                    by Chris Rose
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <h6>Created:</h6>
+                <p><span class="glyphicon glyphicon-time"></span>@Model.Created </p>
+                <h6>Updated:</h6>
+                <p><span class="glyphicon glyphicon-time"></span>@Model.Updated</p>
+
+                <hr>
+
+                <!-- Post Content -->
+                <h6>Post:</h6>
+                <p class="lead"> @Html.Raw(Model.Body) </p>
+
+                <hr>
+
+                <!--MediaURL-->
+                <h6>Media:</h6>
+                <p><span class="lead"></span> <a href="http://@Model.MediaURL" target="_blank"> @Model.MediaURL</a> </p>
+
+                <hr >
+
+                <!-- Blog Comments -->
+                <h6>Comments:</h6>
+                <p><span class="lead"></span> @Model.Comments </p>
+
+                <!-- Comments Form -->
+        
+                        <div class="well">
+                            <h6>Leave a Comment:</h6>
+                            <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="1"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                         </div>
+                  <hr>
+                <button class="buttons">@Html.ActionLink("Back", "Index", "Posts")</button> 
+                @if (User.IsInRole("Admin"))
+                {
+                    <button class="buttons">@Html.ActionLink("Admin", "Admin", "Posts")</button>
+                    <button class="adminButtons">@Html.ActionLink("Edit", "Edit", new { id =Model.Id })</button>
+                    <button class="adminButtons"> @Html.ActionLink("Delete", "Delete", new { id = Model.Id })</button>
+                }
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Chris' Blog</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!--Bootstrap Core CSS-->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!--Custom CSS-->
+    <link href="~/Content/agency.css" rel="stylesheet" />
+    <link href="~/Content/myStyles.css" rel="stylesheet" />
+    <!--Custom Fonts-->
+    <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+</head>
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-shrink ">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!-- Top left nav bar link to top of page-->
+                <a class="navbar-brand page-scroll" href="http://crose.azurewebsites.net#page-top">Home</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="http://crose.azurewebsites.net#services">About Me</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="http://crose.azurewebsites.net#portfolio">Portfolio</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="http://crose.azurewebsites.net#about">Resume</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="http://crose.azurewebsites.net#contact">Contact</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/Posts/Index">Blog</a>
+                    </li>
+                    <li>
+                        @Html.Partial("_LoginPartial")
+                    </li>
+                </ul>        
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </nav><br /><br />
+    <br />
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>*@
+    <div class="container body-content">
+        <br />
+        @RenderBody()
+        <hr />
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; Chris Rose 2016</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li>
+                            <span></span><a href="https://www.facebook.com/Chris-Rose-Web-Developer-518959451610719" target="_blank"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/christopher-rose-403801100" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/cdrose15" target="_blank"><i class="fa fa-github"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <span class="copyright">Created with MVC/HTML/CSS/Bootstrap/JavaScript/jQuery</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <!--Plugin JavaScript-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="~/js/classie.js"></script>
+    <script src="~/js/cbpAnimatedHeader.min.js"></script>
+    <!--Custom Theme JavaScript-->
+    <script src="~/js/agency.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
