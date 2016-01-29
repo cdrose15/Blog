@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Blog.Models.Post>
+﻿
+
+@model IEnumerable<Blog.Models.Post>
 
 @{
     ViewBag.Title = "Index";
@@ -6,8 +8,9 @@
 
 <h2>Admin</h2>
 
-<table class="table">
-    <tr>
+<table id="bloglist"class="display" >
+    <thead>
+     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Created)
         </th>
@@ -21,52 +24,57 @@
             @Html.DisplayNameFor(model => model.Category)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Body)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.MediaURL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Slug)
         </th>
         <th></th>
     </tr>
+        </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Updated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.Raw(item.Body)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MediaURL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Slug)
-        </td>
-        <td>
-           @*<button class="adminButtons"> @Html.ActionLink("Details", "Details", new { slug=item.Slug }) </button>*@
-
-            <button class="adminButtons">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
- 
-            <button class="adminButtons"> @Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-        </td>
-    </tr>
-
+@foreach (var item in Model)
+{
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created.DateTime)
+            </td>
+            <td>
+                @if (item.Updated.HasValue)
+                {
+                    @Html.DisplayFor(modelItem => item.Updated.Value.DateTime)
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.MediaURL)" height="100" />
+             </td>
+            <td>
+                @*@Html.ActionLink("Details", "Details", new { slug=item.Slug }, new { @class = "btn btn-default" })*@
+                @Html.ActionLink("Edit", "Edit", "Posts", new { id = item.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Delete", "Delete", "Posts", new { id = item.Id }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    </tbody>
 }
 
 </table>
 
-<button class="buttons">@Html.ActionLink("Main", "Index")</button>
-<button class="buttons">@Html.ActionLink("Create New", "Create")</button>
+@Html.ActionLink("Blog", "Index","Posts", new { @class = "btn btn-default" })
+@Html.ActionLink("Create", "Create","Posts", new { @class = "btn btn-default" })
+
+@section scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#bloglist').DataTable({
+            "paging":false,
+            "ordering": false,
+            "info": false,
+            "searching":false
+        });
+    });
+</script>
+}

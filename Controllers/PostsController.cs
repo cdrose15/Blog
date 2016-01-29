@@ -22,7 +22,7 @@ namespace Blog.Controllers
         {
             return View(db.Posts.OrderByDescending(p=>p.Created).ToList());
         }
-
+       
         [Authorize(Roles ="Admin")]
         public ActionResult Admin()
         {

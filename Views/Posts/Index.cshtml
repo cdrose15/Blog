@@ -13,7 +13,7 @@
         <div class="col-md-8">
 
             <h2 class="page-header">
-                Welcome To My Blog
+                Welcome To My Blog!
             </h2>
 
             <!--Blog Post -->
@@ -21,25 +21,30 @@
             {
                 <h4>@post.Title</h4>
 
-                <p>Created on: @post.Created</p>
+                <p>Created on: @post.Created.DateTime</p>
 
-                <p><span class="lead"></span> <a href="http://@post.MediaURL" target="_blank"> @post.MediaURL</a> </p>
+                <p><img src="@post.MediaURL " height="150" /></p>
 
                 <p>@Html.Raw(post.Body) </p>
 
-                <button class="buttons">@Html.ActionLink("View Details", @post.Slug,"Blog")</button>
+                @Html.ActionLink("Details","Details", new { slug = @post.Slug }, new { @class = "btn btn-default" })      
 
                 if (User.IsInRole("Admin"))
                 {
-                    <button class="adminButtons">@Html.ActionLink("Edit", "Edit", new { id = post.Id })</button>
-                    <button class="adminButtons"> @Html.ActionLink("Delete", "Delete", new { id = post.Id })</button>
+
+                    @Html.ActionLink("Edit", "Edit","Posts", new { id = post.Id }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Delete", "Delete","Posts", new { id = post.Id },new { @class = "btn btn-default" })
                 }
 
                 <hr>
+
             }
+
             @if (User.IsInRole("Admin"))
             {
-                <button class="buttons">@Html.ActionLink("Admin", "Admin", "Posts")</button>
+                @Html.ActionLink("Admin", "Admin", "Posts",null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Create", "Create", "Posts", new { @class = "btn btn-default" })
+
             }
         </div>
 
