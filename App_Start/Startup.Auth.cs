@@ -7,8 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using Blog.Models;
 using Owin.Security.Providers.LinkedIn;
-using Owin.Security.Providers.Yahoo;
-
+using Owin.Security.Providers.GitHub;
 namespace Blog
 {
     public partial class Startup
@@ -52,9 +51,9 @@ namespace Blog
                 clientId: "0000000040182851",
                 clientSecret: "mRBKrSyOKF-6dqtDP83aw60hDJchenBb");
 
-            //app.UseTwitterAuthentication(
-               //consumerKey: "	HcaXZ0wKoJl4uCi84phWrf9I7",
-               //consumerSecret: "ZhfgpwwbS0JTTQaLXUAWnDRQTSi7xCZBVMXzavCNpQ8MZHOHKY");
+            app.UseTwitterAuthentication(
+               consumerKey:    "YfHQthY0wUYwKwsHCn9pwH8x6",
+               consumerSecret: "wcWS9VFDUNtYaDbN8jWx7FKlZn5EAQCnH0DpcrtUdWzE3QoW0y");
 
             app.UseFacebookAuthentication(
                appId: "483091661898024",
@@ -73,6 +72,11 @@ namespace Blog
             app.UseLinkedInAuthentication
                 ("77zywo4mfvooco",
                 "xdaQVfUbC4vTEP8p");
+
+            app.UseGitHubAuthentication
+                ("29009dfbe91bf57ec4a4",
+                "92e174b852e003bba995cb0e67ddd8aca2a01344");
+
         }
     }
 }

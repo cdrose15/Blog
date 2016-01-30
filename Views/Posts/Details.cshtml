@@ -77,19 +77,24 @@
 
                 <!-- Blog Comments -->
                 <h6>Comments:</h6>
-                <p><span class="lead"></span> @Model.Comments </p>
-
-                <!-- Comments Form -->
-        
-                        <div class="well">
+                <p><span class="lead"></span> </p> 
                             <h6>Leave a Comment:</h6>
                             <form role="form">
                             <div class="form-group">
                                 <textarea class="form-control" rows="1"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-default" }) 
+                                    <h5>Please Login to leave a comment</h5>
+                                    
+                                }
+                                else 
+                                {
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                }
                             </form>
-                         </div>
+                         
                   <hr>
                 @Html.ActionLink("Back", "Index", "Posts", new { @class = "btn btn-default" }) 
                 @if (User.IsInRole("Admin"))
@@ -99,7 +104,8 @@
                     @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })
         
                 }
-            </div>
+                </div>
+       
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 
