@@ -87,3 +87,7 @@ C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\Send
 C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\System.Net.Http.Formatting.dll
 C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\System.Net.Http.Formatting.xml
 C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\Microsoft.Web.Mvc.dll
+C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\PagedList.dll
+C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\PagedList.Mvc.dll
+C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\PagedList.xml
+C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\PagedList.Mvc.xml

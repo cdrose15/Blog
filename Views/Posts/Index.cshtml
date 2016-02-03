@@ -1,31 +1,46 @@
-﻿@model IEnumerable<Blog.Models.Post>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Blog.Models.Post>
 
 @{
     ViewBag.Title = "Home Page";
 }
 
+<!--CSS for PagedListMvc-->
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
 <!-- Page Content -->
 <div class="container">
-
-    <div class="row">
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
             <h2 class="page-header">
-                Welcome To My Blog!
+                Welcome To My
+                <img src="~/img/blog-49006_640 (Custom).png" />
             </h2>
 
             <!--Blog Post -->
+            <!--Loop to show every post that is active-->
             @foreach (var post in Model)
             {
                 <h4>@post.Title</h4>
 
-                <p>Created on: @post.Created.DateTime</p>
+                if (post.Updated.HasValue)
+                {
+                    <p><span class="glyphicon glyphicon-time"></span>@post.Updated.Value.LocalDateTime</p>
+                }
+                else
+                {
+                    <p><span class="glyphicon glyphicon-time"></span>@post.Created.LocalDateTime   </p>
+                }
 
-                <p><img src="@post.MediaURL " height="150" /></p>
+                if (post.MediaURL != null)
+                {
+                    <img class="img-responsive" src="@Url.Content(post.MediaURL)" alt="" style="max-height:150px; max-width:250px;" />
+                }
 
-                <p>@Html.Raw(post.Body) </p>
+                <div class="wrapIt"> <p>@Html.Raw(post.Body)</p> </div>
 
                 @Html.ActionLink("Details","Details", new { slug = @post.Slug }, new { @class = "btn btn-default" })      
 
@@ -35,25 +50,29 @@
                     @Html.ActionLink("Edit", "Edit","Posts", new { id = post.Id }, new { @class = "btn btn-default" })
                     @Html.ActionLink("Delete", "Delete","Posts", new { id = post.Id },new { @class = "btn btn-default" })
                 }
-
                 <hr>
-
             }
 
+            <!--PagedList-->
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+            <!--Show buttons for Admin Roles-->
             @if (User.IsInRole("Admin"))
             {
-                @Html.ActionLink("Admin", "Admin", "Posts",null, new { @class = "btn btn-default" })
-                @Html.ActionLink("Create", "Create", "Posts", new { @class = "btn btn-default" })
 
+            @Html.ActionLink("Admin", "Admin", "Posts",null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Create", "Create", "Posts", null, new { @class = "btn btn-default" })
             }
+
         </div>
 
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
 
             <!-- Blog Search Well -->
-            <div class="well">
-                <h4>Blog Search</h4>
+            <div id="searchBar" class="well">
+                <h5>Search</h5>
                 <div class="input-group">
                     <input type="text" class="form-control">
                     <span class="input-group-btn">
@@ -65,8 +84,21 @@
                 <!-- /.input-group -->
             </div>
         </div>
-
     </div>
-    <!-- /.row -->
-</div>
+
+    <!--Script for DotDotDot Plugin-->
+@section scripts{
+<script src="~/Scripts/jquery.dotdotdot.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+	    $(".wrapIt").dotdotdot({
+	        ellipsis: ' ------> View Details For More ------>',
+	        wrap: 'word',
+            height: 150
+	    });
+});
+</script>
+}
+    
 

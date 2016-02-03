@@ -15,7 +15,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Created.DateTime)
+            @Html.DisplayFor(model => model.Created.LocalDateTime)
         </dd>
 
         <dt>
@@ -25,7 +25,7 @@
         <dd>
             @if (Model.Updated.HasValue)
             {
-                 @Html.DisplayFor(model => model.Updated.Value.DateTime)
+                 @Html.DisplayFor(model => model.Updated.Value.LocalDateTime)
             }
         </dd>
 
@@ -50,7 +50,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Body)
+            @Html.Raw(Model.Body)
         </dd>
 
         <dt>

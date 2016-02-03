@@ -58,6 +58,7 @@
                 @Html.AntiForgeryToken()
                 <div id="socialLoginList">
                 <p>
+                    <!--Using zocial css for nice looking social buttons-->
                     @foreach (AuthenticationDescription p in Model.OtherLogins)
                     {
                         <button type="submit" class="zocial @p.AuthenticationType.ToLower()" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>

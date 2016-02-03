@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using Blog.Models;
 using Microsoft.AspNet.Identity;
+using PagedList;
+using PagedList.Mvc;
+using System.IO;
 
 namespace Blog.Controllers
 {
@@ -18,9 +21,13 @@ namespace Blog.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Posts
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Posts.OrderByDescending(p=>p.Created).ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            return View(db.Posts.OrderByDescending (p => p.Created).ToPagedList(pageNumber,pageSize));
+
         }
        
         [Authorize(Roles ="Admin")]
@@ -57,7 +64,7 @@ namespace Blog.Controllers
         [Authorize (Roles ="Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Category,Body,MediaURL")] Post post)
+        public ActionResult Create([Bind(Include = "Id,Title,Category,Body,MediaURL")] Post post, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -71,6 +78,12 @@ namespace Blog.Controllers
                 {
                     ModelState.AddModelError("Title", "the title must be unique.");
                     return View(post);
+                }
+                if(ImageUploadValidator.IsWebFriendlyImage (image))
+                {
+                    var fileName = Path.GetFileName(image.FileName);
+                    image.SaveAs(Path.Combine(Server.MapPath("~/img/MediaUrl/"), fileName));
+                    post.MediaURL = "~/img/MediaUrl/" + fileName;
                 }
                 post.Slug = Slug;
 
@@ -99,6 +112,7 @@ namespace Blog.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(post);
         }
 
@@ -108,14 +122,20 @@ namespace Blog.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Created,Updated,Title,Category,Body,MediaURL,Slug")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Created,Updated,Title,Category,Body,MediaURL,Slug")] Post post, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
                 post.Updated = System.DateTimeOffset.Now;
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Posts", new { slug = @post.Slug });
+            }
+            if (ImageUploadValidator.IsWebFriendlyImage(image))
+            {
+                var fileName = Path.GetFileName(image.FileName);
+                image.SaveAs(Path.Combine(Server.MapPath("~/img/MediaUrl/"), fileName));
+                post.MediaURL = "~/img/MediaUrl/" + fileName;
             }
             return View(post);
         }

@@ -8,6 +8,7 @@
 
 <h2>Admin</h2>
 
+<!--jQuery plug in Data Table for a more organized display-->
 <table id="bloglist"class="display" >
     <thead>
      <tr>
@@ -30,17 +31,18 @@
     </tr>
         </thead>
 
+    <!--Loop to show every active post-->
 @foreach (var item in Model)
 {
     <tbody>
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Created.DateTime)
+                @Html.DisplayFor(modelItem => item.Created.LocalDateTime)
             </td>
             <td>
                 @if (item.Updated.HasValue)
                 {
-                    @Html.DisplayFor(modelItem => item.Updated.Value.DateTime)
+                    @Html.DisplayFor(modelItem => item.Updated.Value.LocalDateTime)
                 }
             </td>
             <td>
@@ -50,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
-                <img src="@Html.DisplayFor(modelItem => item.MediaURL)" height="100" />
+                <img class="img-responsive" src="@Url.Content(item.MediaURL)" alt="" style="max-height:100px; max-width:200px"/>
              </td>
             <td>
                 @*@Html.ActionLink("Details", "Details", new { slug=item.Slug }, new { @class = "btn btn-default" })*@
@@ -66,6 +68,7 @@
 @Html.ActionLink("Home", "Index","Posts", new { @class = "btn btn-default" })
 @Html.ActionLink("Create", "Create","Posts", new { @class = "btn btn-default" })
 
+<!--Script for Data Table plugin-->
 @section scripts {
 <script type="text/javascript">
     $(document).ready(function () {

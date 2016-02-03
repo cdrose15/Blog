@@ -89,6 +89,14 @@
       <HintPath>..\packages\Owin.Security.Providers.1.26\lib\net45\Owin.Security.Providers.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SendGrid, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
       <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGrid.dll</HintPath>
       <Private>True</Private>
@@ -221,6 +229,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -233,6 +242,7 @@
     <Compile Include="Models\CodeFirst\Post.cs" />
     <Compile Include="Models\ContactMessage.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ImageUploadValidator.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\StringUtilites.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -243,6 +253,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\myStyles.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\zocial.css" />
     <Content Include="favicon.ico" />
     <Content Include="font-awesome\css\font-awesome.css" />
@@ -250,8 +261,7 @@
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="img\bootstrap.png" />
-    <Content Include="img\HTML5_Logo_512.png" />
+    <Content Include="img\blog-49006_640 %28Custom%29.png" />
     <Content Include="img\lg_aspmvc5.png" />
     <Content Include="Scripts\agency.js" />
     <Content Include="Scripts\cbpAnimatedHeader.js" />
@@ -259,6 +269,8 @@
     <Content Include="Scripts\classie.js" />
     <Content Include="Scripts\contact_me.js" />
     <Content Include="Scripts\jqBootstrapValidation.js" />
+    <Content Include="Scripts\jquery.dotdotdot.js" />
+    <Content Include="Scripts\jquery.dotdotdot.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
@@ -522,9 +534,12 @@
     <Content Include="Views\Posts\Admin.cshtml" />
     <Content Include="Views\Account\ResendEmailConfirmation.cshtml" />
     <Content Include="Views\Account\ConfirmationSent.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="img\MediaUrl\" />
     <Folder Include="less\" />
     <Folder Include="mail\" />
   </ItemGroup>

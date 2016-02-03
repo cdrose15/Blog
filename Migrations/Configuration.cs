@@ -34,7 +34,7 @@ namespace Blog.Migrations
                 {
                     UserName = "cdrose15@gmail.com",
                     Email = "cdrose15@gmail.com",
-                    DisplayName = "CRose"
+                    DisplayName = "Chris"
                 }, "Tripoli1!");
             }
 

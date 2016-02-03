@@ -23,6 +23,7 @@
     <!-- Custom CSS -->
     <link href="css/blog-post.css" rel="stylesheet">
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -51,59 +52,73 @@
                     by Chris Rose
                 </p>
 
-                <hr>
-
                 <!-- Date/Time -->
-                <h6>Created:</h6>
-                <p><span class="glyphicon glyphicon-time"></span>@Model.Created.DateTime   </p>
-                <h6>Updated:</h6>
                 @if (Model.Updated.HasValue)
                 {
-                <p><span class="glyphicon glyphicon-time"></span>@Model.Updated.Value.DateTime</p>
+                    <p><span class="glyphicon glyphicon-time"></span>@Model.Updated.Value.LocalDateTime</p>
                 }
-                <hr>
-
-                <!-- Post Content -->
-                <h6>Post:</h6>
-                <p class="lead"> @Html.Raw(Model.Body) </p>
-
-                <hr>
+                else
+                {
+                    <p><span class="glyphicon glyphicon-time"></span>@Model.Created.LocalDateTime   </p>
+                }
 
                 <!--MediaURL-->
-                <h6>Media:</h6>
-                <p><img src="@Model.MediaURL " height="200" /></p>
+                @if (Model.MediaURL != null)
+                {
+                    <img class="img-responsive" src="@Url.Content(Model.MediaURL)" alt="" style="max-height:200px; max-width:300px"/>
+                }
 
-                <hr >
+                <!-- Post Content -->
+                <p class="lead"> @Html.Raw(Model.Body) </p>
 
-                <!-- Blog Comments -->
-                <h6>Comments:</h6>
-                <p><span class="lead"></span> </p> 
-                            <h6>Leave a Comment:</h6>
-                            <form role="form">
+                            <p><h6>Leave a Comment:</h6></p>
+                            <form role="form" action="@Url.Action("Create","Comments")" method="post">
                             <div class="form-group">
-                                <textarea class="form-control" rows="1"></textarea>
+                                <input type="hidden" name="PostId" value="@Model.Id" />
+                                <textarea class="form-control" rows="1" type="hidden" name="body"></textarea>
                             </div>
+                                <!--Hide submit button for comments unless user is logged in-->
                                 @if (!User.Identity.IsAuthenticated)
                                 {
-                                    @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-default" }) 
-                                    <h5>Please Login to leave a comment</h5>
+                                    <h5>Please Log In to leave a comment</h5>
+                                    @Html.ActionLink("Log In", "Login", "Account", null, new { @class = "btn btn-default" }) 
                                     
                                 }
                                 else 
                                 {
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 }
-                            </form>
+                            </form> <br />
+                <!-- Blog Comments -->
+                @foreach (var comment in Model.Comments)
+                {
+                    <div>
+                        <p><h6>On @comment.Created.LocalDateTime, @comment.Author.DisplayName wrote:</h6></p>
+                        <p>@comment.Body</p>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.Id }, new { @class = "btn btn-default" })
+                            @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.Id }, new { @class = "btn btn-default" })
+                        }
+                        @if (User.IsInRole("Moderator"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.Id }, new { @class = "btn btn-default" })
+                            @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.Id }, new { @class = "btn btn-default" })
+                        }
+                    </div>
+                }
                          
                   <hr>
                 @Html.ActionLink("Back", "Index", "Posts", new { @class = "btn btn-default" }) 
+                <!--Buttons hidden unless Admin is logged in-->
                 @if (User.IsInRole("Admin"))
                 {
-                    @Html.ActionLink("Admin", "Admin", "Posts", new { @class = "btn btn-default" })
+                    @Html.ActionLink("Admin", "Admin", "Posts", null, new { @class = "btn btn-default" })
                     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })
-        
+                    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })        
                 }
+
                 </div>
        
             <!-- Blog Sidebar Widgets Column -->
@@ -111,7 +126,7 @@
 
                 <!-- Blog Search Well -->
                 <div class="well">
-                    <h4>Blog Search</h4>
+                    <h5>Search</h5>
                     <div class="input-group">
                         <input type="text" class="form-control">
                         <span class="input-group-btn">
