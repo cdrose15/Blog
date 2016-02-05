@@ -38,7 +38,8 @@
                         @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
+            @if (Model.MediaURL == null)
+            {
                 <div class="form-group">                   
                     @Html.LabelFor(model => model.MediaURL, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -46,6 +47,11 @@
                         @Html.ValidationMessageFor(model => model.MediaURL, "", new { @class = "text-danger" })
                     </div>
                 </div>
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.MediaURL)
+            }
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
@@ -58,6 +64,7 @@
             }
 
             <div>
+                @Html.ActionLink("Cancel", "Details", "Posts", new { slug = @Model.Slug }, new { @class = "btn btn-default" })
                 @Html.ActionLink("Admin", "Admin", "Posts", new { @class = "btn btn-default" })
             </div>
 

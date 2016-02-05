@@ -49,10 +49,14 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category)
+                  @Html.DisplayFor(modelItem => item.Category)
+   
             </td>
             <td>
-                <img class="img-responsive" src="@Url.Content(item.MediaURL)" alt="" style="max-height:100px; max-width:200px"/>
+                @if (item.MediaURL != null)
+                {
+                    <img class="img-responsive" src="@Url.Content(item.MediaURL)" alt="" id="adminImage" />
+                }
              </td>
             <td>
                 @*@Html.ActionLink("Details", "Details", new { slug=item.Slug }, new { @class = "btn btn-default" })*@

@@ -65,7 +65,7 @@
                 <!--MediaURL-->
                 @if (Model.MediaURL != null)
                 {
-                    <img class="img-responsive" src="@Url.Content(Model.MediaURL)" alt="" style="max-height:200px; max-width:300px"/>
+                    <img class="img-responsive" src="@Url.Content(Model.MediaURL)" alt="" id="detailsImage"/>
                 }
 
                 <!-- Post Content -->
@@ -111,21 +111,13 @@
                          
                   <hr>
                 @Html.ActionLink("Back", "Index", "Posts", new { @class = "btn btn-default" }) 
-                <!--Buttons hidden unless Admin is logged in-->
-                @if (User.IsInRole("Admin"))
-                {
-                    @Html.ActionLink("Admin", "Admin", "Posts", null, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })        
-                }
 
                 </div>
        
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
-
                 <!-- Blog Search Well -->
-                <div class="well">
+                @*<div class="well">
                     <h5>Search</h5>
                     <div class="input-group">
                         <input type="text" class="form-control">
@@ -134,14 +126,21 @@
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
-                    </div>
+                    </div>*@
                     <!-- /.input-group -->
+                </div>
+                <div class="adminButtons">
+                <!--Buttons hidden unless Admin is logged in-->
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Admin", "Admin", "Posts", null, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })
+                    }
                 </div>
             </div>
         </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
+
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 

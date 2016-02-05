@@ -27,7 +27,8 @@ namespace Blog.Models
         public string MediaURL { get; set; }
         public string Slug { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }    
-
+        public virtual ICollection<Comment> Comments { get; set; }
+        
+                 
     }
 }

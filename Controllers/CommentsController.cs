@@ -18,7 +18,13 @@ namespace Blog.Controllers
         // GET: Comments
         public ActionResult Index()
         {
-            return View(db.Comments.OrderByDescending(c=>c.Created).ToList());
+            return View(db.Comments.OrderBy(c=>c.Created).ToList());
+        }
+
+        [Authorize(Roles = "Admin, Moderator")]
+        public ActionResult Admin()
+        {
+            return View(db.Comments.OrderBy(c =>c.Created).ToList());
         }
 
         // POST: Comments/Create

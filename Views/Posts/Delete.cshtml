@@ -79,6 +79,7 @@
         </div>
     }
     <br />
+    @Html.ActionLink("Cancel", "Details", "Posts", new { slug = @Model.Slug }, new { @class = "btn btn-default" })
     @Html.ActionLink("Admin", "Admin", "Posts", new { @class = "btn btn-default" })
 
 </div>

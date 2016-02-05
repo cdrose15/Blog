@@ -20,16 +20,31 @@ namespace Blog.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
         // GET: Posts
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string userSearch)
         {
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
+                ViewBag.userSearch = userSearch;
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
 
-            return View(db.Posts.OrderByDescending (p => p.Created).ToPagedList(pageNumber,pageSize));
+                var allPosts = from p in db.Posts select p;
 
+                if (!string.IsNullOrWhiteSpace(userSearch))
+                {
+                    allPosts = allPosts.Where(p => p.Title.Contains(userSearch)
+                         || p.Body.Contains(userSearch)
+                         || p.Category.Contains(userSearch)
+                         || p.Comments.Any(c => c.Body.Contains(userSearch)));
+
+                    return View(allPosts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
+
+            }
+
+            return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
         }
-       
+
+
         [Authorize(Roles ="Admin")]
         public ActionResult Admin()
         {
@@ -126,17 +141,18 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (ImageUploadValidator.IsWebFriendlyImage(image))
+                {
+                    var fileName = Path.GetFileName(image.FileName);
+                    image.SaveAs(Path.Combine(Server.MapPath("~/img/MediaUrl/"), fileName));
+                    post.MediaURL = "~/img/MediaUrl/" + fileName;
+                }
                 post.Updated = System.DateTimeOffset.Now;
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Details","Posts", new { slug = @post.Slug });
+                return RedirectToAction("Details", "Posts", new { slug = @post.Slug });
             }
-            if (ImageUploadValidator.IsWebFriendlyImage(image))
-            {
-                var fileName = Path.GetFileName(image.FileName);
-                image.SaveAs(Path.Combine(Server.MapPath("~/img/MediaUrl/"), fileName));
-                post.MediaURL = "~/img/MediaUrl/" + fileName;
-            }
+
             return View(post);
         }
 

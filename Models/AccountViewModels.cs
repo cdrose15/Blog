@@ -11,7 +11,7 @@ namespace Blog.Models
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Username")]
+        [Display(Name = "Display Name")]
         public string DisplayName { get; set; }
     }
 
@@ -76,7 +76,7 @@ namespace Blog.Models
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Username")]
+        [Display(Name = "Display Name")]
         public string DisplayName { get; set; }
 
         [Required]
@@ -86,7 +86,7 @@ namespace Blog.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
@@ -105,7 +105,7 @@ namespace Blog.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 

@@ -1,7 +1,31 @@
-﻿.buttons{
-    width:100px;
+﻿
+.adminButtons{
+    text-align :right ;
 }
 
-.adminButtons{
-    width:75px;
+#indexImage{
+    max-height :150px;
+    max-width :250px;
+}
+
+#detailsImage{
+    max-height :200px;
+    max-width :300px;
+}
+
+#adminImage{
+    max-height :100px;
+    max-width :200px;
+}
+
+body{
+    background-color:cadetblue;
+}
+
+.text-info{
+    color:#0e25a8;
+}
+
+.text-danger{
+    color:#cc0909;
 }
