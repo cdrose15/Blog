@@ -34,7 +34,7 @@
     <!--Loop to show every active post-->
 @foreach (var item in Model)
 {
-    <tbody>
+    <tbody id="admintext">
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Created.LocalDateTime)

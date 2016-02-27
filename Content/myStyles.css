@@ -20,6 +20,7 @@
 
 body{
     background-color:cadetblue;
+    color:beige;
 }
 
 .text-info{
@@ -28,4 +29,20 @@ body{
 
 .text-danger{
     color:#cc0909;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: palegoldenrod;
+}
+
+.section-subheading{
+    color:beige;
+}
+
+#admintext{
+    color:black;
+}
+
+hr{
+    border-color:palegoldenrod;
 }

@@ -62,6 +62,12 @@
                     <p><span class="glyphicon glyphicon-time"></span>@Model.Created.LocalDateTime   </p>
                 }
 
+                <!--Category-->
+                @if (Model.Category != null)
+                {
+                    <p>@Model.Category</p>
+                }
+
                 <!--MediaURL-->
                 @if (Model.MediaURL != null)
                 {
