@@ -91,3 +91,14 @@ C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\Page
 C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\PagedList.Mvc.dll
 C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\PagedList.xml
 C:\Users\cdros\OneDrive\Documents\Visual Studio 2015\Projects\Blog\Blog\bin\PagedList.Mvc.xml
+C:\Users\cdros\Documents\GitHub\Blog\bin\ApplicationInsights.config
+C:\Users\cdros\Documents\GitHub\Blog\bin\Blog.dll.config
+C:\Users\cdros\Documents\GitHub\Blog\bin\Blog.dll
+C:\Users\cdros\Documents\GitHub\Blog\bin\Blog.pdb
+C:\Users\cdros\Documents\GitHub\Blog\bin\PagedList.Mvc.dll
+C:\Users\cdros\Documents\GitHub\Blog\bin\PagedList.Mvc.xml
+C:\Users\cdros\Documents\GitHub\Blog\obj\Debug\Blog.dll
+C:\Users\cdros\Documents\GitHub\Blog\obj\Debug\Blog.pdb
+C:\Users\cdros\Documents\GitHub\Blog\bin\PagedList.dll
+C:\Users\cdros\Documents\GitHub\Blog\bin\PagedList.xml
+C:\Users\cdros\Documents\GitHub\Blog\obj\Debug\Blog.csprojResolveAssemblyReference.cache
